@@ -1,0 +1,12 @@
+*.log
+Fall2025-Project3-agparker9/Controllers/
+Fall2025-Project3-agparker9/Areas/
+Fall2025-Project3-agparker9/Data/
+Fall2025-Project3-agparker9/Views/
+Fall2025-Project3-agparker9/Models/
+Fall2025-Project3-agparker9/obj/
+Fall2025-Project3-agparker9/Properties
+Fall2025-Project3-agparker9/bin/
+.idea/
+Fall2025-Project3-agparker9/*.json
+Fall2025-Project3-agparker9/wwwroot/lib/
