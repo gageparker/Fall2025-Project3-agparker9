@@ -29,3 +29,59 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.header-Text{
+    text-align: center;
+    font-size: 80px;
+    color: white;
+    text-shadow:
+            -2px -2px 0 black,
+            2px -2px 0 black,
+            -2px  2px 0 black,
+            2px  2px 0 black;
+}
+.slogan{
+    text-align: center; 
+}
+
+.imageLinks {
+    margin-left: 275px;
+    margin-top: 200px;
+    display: flex;
+    gap: 300px;
+}
+
+.imageLinks img {
+    width: 200px;
+    border-radius: 10px;
+    border: 5px solid black;
+}
+
+.imageLinks a{
+    text-decoration: none;
+}
+
+.filmContainer h5{
+    text-align: center;
+    color: white;
+    text-shadow:
+            -1px -1px 0 black,
+            1px -1px 0 black,
+            -1px  1px 0 black,
+            1px  1px 0 black;
+}
+
+.actorContainer h5{
+    text-align: center;
+    color: white;
+    text-shadow:
+            -1px -1px 0 black,
+            1px -1px 0 black,
+            -1px  1px 0 black,
+            1px  1px 0 black;
+}
+
+.main-body{
+    background-image: url('HomePageBackground.jpg');
+    background-size: cover;
+}
