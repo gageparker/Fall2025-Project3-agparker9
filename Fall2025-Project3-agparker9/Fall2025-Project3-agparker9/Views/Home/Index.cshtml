@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="main-Page">
+    <h1 class="header-Text">Tide MovieManager</h1>
+    <p class="slogan">Your personal movie manager — track, analyze, and organize your favorite films.
+    </p>
+    
+</div>
+
+<div class="imageLinks">
+    <a asp-area="" asp-controller="Home" asp-action="Movies">
+        <div class="filmContainer">
+            <img src="Film.jpg" class="filmPicture" title="Movies">
+            <h5>Movies</h5>
+        </div>
+    </a>
+    <a asp-area="" asp-controller="Home" asp-action="Actors">
+        <div class="actorContainer">
+            <img src="Actors.jpg" title="Actors">
+            <h5>Actors</h5>
+        </div>
+    </a>
+</div>
+

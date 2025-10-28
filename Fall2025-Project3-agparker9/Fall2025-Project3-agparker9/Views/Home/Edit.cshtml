@@ -1,0 +1,30 @@
+@model Fall2025_Project3_agparker9.Models.MovieModel
+
+@{
+    ViewData["BodyClass"] = "edit-page";
+}
+
+<h2>Edit Movie</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="MovieId" />
+
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+    </div>
+    <div>
+        <label asp-for="Genre"></label>
+        <input asp-for="Genre" />
+    </div>
+    <div>
+        <label asp-for="Year"></label>
+        <input asp-for="Year" />
+    </div>
+    <div>
+        <label>Poster</label>
+        <input type="file" name="PosterFile" />
+    </div>
+
+    <button type="submit">Save</button>
+</form>
