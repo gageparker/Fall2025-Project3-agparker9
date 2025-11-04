@@ -11,11 +11,15 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
+    private readonly IConfiguration _configuration;
 
-    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IConfiguration configuration)
     {
         _logger = logger;
         _context = context;
+        _configuration = configuration;
+
     }
 
     //index cshtml view
@@ -110,11 +114,13 @@ public class HomeController : Controller
         return View(actors);
     }
 
+    //actor create cshtml view
     public IActionResult CreateActor()
     {
         return View();
     }
     
+    //actor create controller for photo
     [HttpPost]
     public async Task<IActionResult> CreateActor(ActorModel actor, IFormFile photoFile)
     {
@@ -129,6 +135,43 @@ public class HomeController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Actors));
     }
+    
+    //edit cshtml controller
+    public async Task<IActionResult> ActorEdit(int id)
+    {
+        var actor = await _context.Actor.FindAsync(id);
+        if (actor == null)
+            return NotFound();
+
+        return View(actor);
+    }
+    
+    //edit poster controller
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ActorEdit(int id, ActorModel actor, IFormFile? photoFile)
+    {
+        var existingActor = await _context.Actor.FindAsync(id);
+        if (existingActor == null)
+            return NotFound();
+
+        existingActor.Name = actor.Name;
+        existingActor.Gender = actor.Gender;
+        existingActor.Age = actor.Age;
+        
+        if (photoFile != null && photoFile.Length > 0)
+        {
+            using var ms = new MemoryStream();
+            await photoFile.CopyToAsync(ms);
+            existingActor.Photo = ms.ToArray();
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Actors));
+    }
+    
+    
+    
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

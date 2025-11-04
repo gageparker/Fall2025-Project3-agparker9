@@ -1,0 +1,30 @@
+@model Fall2025_Project3_agparker9.Models.ActorModel
+
+@{
+    ViewData["BodyClass"] = "actorEdit-page";
+}
+
+<h2>Edit Actor</h2>
+
+<form asp-action="ActorEdit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="ActorId" />
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Gender"></label>
+        <input asp-for="Gender" />
+    </div>
+    <div>
+        <label asp-for="Age"></label>
+        <input asp-for="Age" />
+    </div>
+    <div>
+        <label>Photo</label>
+        <input type="file" name="PhotoFile" />
+    </div>
+
+    <button type="submit">Save</button>
+</form>
