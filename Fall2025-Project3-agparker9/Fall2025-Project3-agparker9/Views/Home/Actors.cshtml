@@ -50,6 +50,7 @@
 
                 </td>
                 <td>
+                    <a asp-action="ActorDetails" asp-route-id="@actor.ActorId">Details</a> |
                     <a asp-action="actorEdit" asp-route-id="@actor.ActorId">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@actor.ActorId"
                        onclick="return confirm('Are you sure you want to delete this movie?');">

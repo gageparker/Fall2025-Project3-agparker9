@@ -103,6 +103,9 @@ body {
 .movieDetails{
     background: white !important;
 }
+.actorDetails{
+    background: white !important;
+}
 .main-body{
     background-image: url('HomePageBackground.jpg');
     background-size: cover;
