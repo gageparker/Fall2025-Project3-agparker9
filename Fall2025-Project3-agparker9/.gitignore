@@ -7,3 +7,5 @@ Fall2025-Project3-agparker9/*.json
 Fall2025-Project3-agparker9/wwwroot/lib/
 Fall2025-Project3-agparker9/Migrations/
 Fall2025-Project3-agparker9.sln.DotSettings.user
+.config/
+.obj/

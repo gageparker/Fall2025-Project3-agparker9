@@ -11,13 +11,13 @@ namespace Fall2025_Project3_agparker9.Services
 
         public AiService(IConfiguration configuration)
         {
-            // Get values from secrets.json
+            
             var endpoint = new Uri(configuration["OpenAI:Endpoint"]!);
             var apiKey = configuration["OpenAI:Key"];
             _deploymentName = configuration["OpenAI:DeploymentName"]!;
             
             
-            // Initialize the Azure OpenAI client
+           
             _client = new AzureOpenAIClient(endpoint, new AzureKeyCredential(apiKey!));
         }
 
@@ -87,7 +87,7 @@ Do not include any additional explanation or text.";
             var response = await chatClient.CompleteChatAsync(messages);
             var content = response.Value.Content[0].Text;
 
-            return ParseReviews(content, 50); // Assume max 50 actors
+            return ParseReviews(content, 50); 
         }
 
         public async Task<List<string>> GetMoviesForActorAsync(string actorName)
@@ -107,7 +107,7 @@ Do not include any additional explanation or text.";
             var response = await chatClient.CompleteChatAsync(messages);
             var content = response.Value.Content[0].Text;
 
-            return ParseReviews(content, 50); // Assume max 50 movies
+            return ParseReviews(content, 50); 
         }
         
         private List<string> ParseReviews(string content, int expectedCount)
@@ -119,7 +119,7 @@ Do not include any additional explanation or text.";
             {
                 var trimmed = line.Trim();
                 
-                // Remove numbering (handles formats like "1.", "1)", "1 -", etc.)
+                
                 var review = System.Text.RegularExpressions.Regex.Replace(trimmed, @"^\d+[\.\)\-\:]\s*", "");
                 
                 if (!string.IsNullOrWhiteSpace(review))

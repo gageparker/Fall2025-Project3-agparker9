@@ -1,9 +1,11 @@
-﻿@{
+﻿@model IEnumerable<Fall2025_Project3_agparker9.Models.MovieModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="main-Page">
-    <h1 class="header-Text">Tide MovieManager</h1>
+    <h1 class="main-Header-Text">Tide MovieManager</h1>
     <p class="slogan">Your personal movie manager — track, analyze, and organize your favorite films.
     </p>
     
@@ -24,4 +26,75 @@
     </a>
 </div>
 
-<div style="height: 700px;"></div>
+
+<div class="container mt-5 mb-5">
+    <h2 class="featured-Text">Featured Movies</h2>
+    
+    @if (Model != null && Model.Any())
+    {
+        <div class="poster-carousel-container">
+            <button class="carousel-arrow carousel-arrow-left" id="prevBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            </button>
+
+            <div class="poster-display">
+                @{
+                    var movieList = Model.ToList();
+                    for (int i = 0; i < movieList.Count; i++)
+                    {
+                        var movie = movieList[i];
+                        var isActive = i == 0 ? "active" : "";
+                        
+                        <div class="poster-item @isActive" data-index="@i">
+                            <a asp-action="MovieDetails" asp-route-id="@movie.MovieId" class="poster-link">
+                                @if (movie.Poster != null)
+                                {
+                                    var imageBase64 = Convert.ToBase64String(movie.Poster);
+                                    var imageSrc = $"data:image/png;base64,{imageBase64}";
+                                    <img src="@imageSrc" alt="@movie.Title" class="poster-image" />
+                                }
+                                else
+                                {
+                                    <div class="poster-placeholder">
+                                        <p>No Poster</p>
+                                    </div>
+                                }
+                                <div class="poster-info">
+                                    <h4>@movie.Title</h4>
+                                    <p>@movie.Year | @movie.Genre</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+
+            <button class="carousel-arrow carousel-arrow-right" id="nextBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button>
+        </div>
+
+       
+        <div class="carousel-indicators-custom">
+            @for (int i = 0; i < movieList.Count; i++)
+            {
+                var activeClass = i == 0 ? "active" : "";
+                <span class="indicator-dot @activeClass" data-index="@i"></span>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <p>No movies available yet. <a asp-action="Create">Add your first movie!</a></p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="/Users/gageparker/Documents/GitHub/Fall2025-Project3-agparker9/Fall2025-Project3-agparker9/Fall2025-Project3-agparker9/wwwroot/js/site.js"></script>
+}

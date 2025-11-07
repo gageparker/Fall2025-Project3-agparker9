@@ -27,9 +27,11 @@ public class HomeController : Controller
     }
 
     //index cshtml view
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        // Get all movies to display in the carousel
+        var movies = await _context.Movie.ToListAsync();
+        return View(movies);
     }
     
     
@@ -174,6 +176,7 @@ public class HomeController : Controller
         return RedirectToAction(nameof(Actors));
     }
     
+    //movie details controller
     public async Task<IActionResult> MovieDetails(int? id)
     {
         if (id == null) return NotFound();
@@ -214,6 +217,7 @@ public class HomeController : Controller
         return View(viewModel);
     }
 
+    //actors details controller
     public async Task<IActionResult> ActorDetails(int? id)
     {
         if (id == null) return NotFound();
@@ -254,13 +258,15 @@ public class HomeController : Controller
         return View(viewModel);
     }
 
-
+    
     private string GetSentimentLabel(double score)
     {
         if (score >= 0.05) return "Positive";
         if (score <= -0.05) return "Negative";
         return "Neutral";
     }
+    
+   
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
